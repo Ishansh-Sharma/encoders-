@@ -22,7 +22,7 @@ lungs_condition = {
 #now i have identified the coulmns in the dataframe that have the encodable value and now i have to jsut encode it
 #to do that i wull have to give like the system ki good pe 2 , medium pe 1 and poor pe 0 and it has to then transform the coumn accordingly
 
-# here i will pass the whole database in the funtion which will then iderntify ki con sa column encodable hai
+# here i will pass the whole file whatever in the funtion which will then iderntify ki con sa column encodable haianad encode it 
 
 def key_transformation(lung_condition):
     lung_database = pd.DataFrame(lungs_condition)
@@ -48,5 +48,5 @@ def key_transformation(lung_condition):
 new_database = key_transformation(lungs_condition)
 print(new_database)
 
-#encodes the values as they should be and returns the updated database
+
 
