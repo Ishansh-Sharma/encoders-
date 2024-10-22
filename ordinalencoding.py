@@ -1,0 +1,52 @@
+import pandas as pd
+import numpy as np
+from pandas.core.interchange.from_dataframe import categorical_column_to_series
+
+#dataset : bana lete h
+
+lungs_condition = {
+    "name":["alex","alexa","bhoomika","charu","dinesh","ela","falguni","gokul","himanshu","isha","jaitra","kotim","lawd"],
+    "age":[23,24,18,18,18,34,45,17,19,42,20,92,100],
+    "region of existence":["nyc","manhattan","delhi","jaipur","indore","tokyo","delhi","delhi","shimal","chennai","hyderabad","chennai","delhi"],
+    "condition":["medium","good","medium","good","good","medium","poor","poor","poor","good","good","medium","medium"],
+    #"test":["low","low","low","low","low","low","low","low","low","low","low","low","low"],
+    "socre of lung ":[5,3,6,2,4,6,9,8,8,3,2,7,6]
+}
+
+
+#categorical_columns = lung_database.select_dtypes(include='object').columns
+#encodable_columns = [col for col in categorical_columns if lung_database[col].nunique()<=3]
+#print(categorical_columns)
+#print(encodable_columns)
+
+#now i have identified the coulmns in the dataframe that have the encodable value and now i have to jsut encode it
+#to do that i wull have to give like the system ki good pe 2 , medium pe 1 and poor pe 0 and it has to then transform the coumn accordingly
+
+# here i will pass the whole database in the funtion which will then iderntify ki con sa column encodable hai
+
+def key_transformation(lung_condition):
+    lung_database = pd.DataFrame(lungs_condition)
+    categorical_columns = lung_database.select_dtypes(include='object').columns
+    encodable_columns = [col for col in categorical_columns if lung_database[col].nunique() <= 3]
+    for cols in encodable_columns:
+        lung_database[cols] = lung_database[cols].replace({
+            "poor":0,
+            "medium":1,
+            "good":2,
+            "high":2,
+            "low":0,
+            "bad":0,
+            "average":1,
+            "big":2,
+            "small":0,
+            "major":2,
+            "minor":0
+        })
+
+    return lung_database
+
+new_database = key_transformation(lungs_condition)
+print(new_database)
+
+#encodes the values as they should be and returns the updated database
+
